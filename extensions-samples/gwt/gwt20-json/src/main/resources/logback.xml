@@ -1,0 +1,16 @@
+<configuration scan="true" scanPeriod="30 seconds" debug="false">
+	<contextName>test</contextName>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<target>System.out</target>
+		<encoder>
+			<pattern>%.-1level %date{ISO8601} [%logger{10}] [%thread] [%X{akkaSource}] %X{AuditType} - %msg %n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="org.atmosphere.cpr" level="TRACE" />
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

@@ -22,6 +22,8 @@
         <gwt.compiler.strict>true</gwt.compiler.strict>
         <gwt.copyWebapp>true</gwt.copyWebapp>
         <outputDir>${war.target}/WEB-INF/classes</outputDir>
+        <logback.version>1.0.13</logback.version>
+		<org.slf4j-version>1.7.5</org.slf4j-version>
     </properties>
 
     <build>
@@ -33,6 +35,8 @@
                 <version>${gwt-version}</version>
                 <configuration>
                     <module>${gwtModule}</module>
+                    <!-- inplace allows to run in eclipse easily -->
+                    <inplace>true</inplace>
                     <gwtVersion>${gwt-version}</gwtVersion>
                     <runTarget>http://localhost:8888/index.jsp</runTarget>
                     <noServer>false</noServer>
@@ -132,9 +136,16 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jdk14</artifactId>
-        </dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${org.slf4j-version}</version>
+		</dependency>
     </dependencies>
 
 </project>
