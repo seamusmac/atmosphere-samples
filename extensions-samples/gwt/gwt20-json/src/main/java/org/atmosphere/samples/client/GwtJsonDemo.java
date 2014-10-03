@@ -27,15 +27,18 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
+
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.atmosphere.gwt20.client.Atmosphere;
 import org.atmosphere.gwt20.client.AtmosphereCloseHandler;
 import org.atmosphere.gwt20.client.AtmosphereMessageHandler;
 import org.atmosphere.gwt20.client.AtmosphereOpenHandler;
 import org.atmosphere.gwt20.client.AtmosphereRequest;
 import org.atmosphere.gwt20.client.AtmosphereRequestConfig;
+import org.atmosphere.gwt20.client.AtmosphereRequestConfig.Flags;
 import org.atmosphere.gwt20.client.AtmosphereResponse;
 import org.atmosphere.gwt20.client.AutoBeanClientSerializer;
 
@@ -89,8 +92,9 @@ public class GwtJsonDemo implements EntryPoint {
         AtmosphereRequestConfig jsonRequestConfig = AtmosphereRequestConfig.create(json_serializer);
         jsonRequestConfig.setUrl(GWT.getModuleBaseURL() + "atmosphere/json");
         jsonRequestConfig.setContentType("application/json; charset=UTF-8");
-        jsonRequestConfig.setTransport(AtmosphereRequestConfig.Transport.STREAMING);
+        jsonRequestConfig.setTransport(AtmosphereRequestConfig.Transport.LONG_POLLING);
         jsonRequestConfig.setFallbackTransport(AtmosphereRequestConfig.Transport.LONG_POLLING);
+        jsonRequestConfig.setFlags(Flags.trackMessageLength);
         jsonRequestConfig.setOpenHandler(new AtmosphereOpenHandler() {
             @Override
             public void onOpen(AtmosphereResponse response) {

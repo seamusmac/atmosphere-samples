@@ -21,6 +21,10 @@ import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.atmosphere.cache.UUIDBroadcasterCache;
+import org.atmosphere.client.TrackMessageSizeInterceptor;
+import org.atmosphere.config.service.AtmosphereHandlerService;
 import org.atmosphere.cpr.AtmosphereResource;
 import org.atmosphere.cpr.DefaultBroadcasterFactory;
 import org.atmosphere.cpr.Serializer;
@@ -34,6 +38,7 @@ import org.atmosphere.handler.AbstractReflectorAtmosphereHandler;
  * 
  * @author p.havelaar
  */
+@AtmosphereHandlerService(properties = { "heartbeat=20000" }, path = "/GwtJsonDemo/atmosphere/json", broadcasterCache = UUIDBroadcasterCache.class, interceptors = { TrackMessageSizeInterceptor.class })
 public class JsonAtmosphereHandler extends AbstractReflectorAtmosphereHandler {
     
   static final Logger logger = Logger.getLogger("AtmosphereHandler");
